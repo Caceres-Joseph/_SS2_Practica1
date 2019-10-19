@@ -37,7 +37,7 @@ df.createOrReplaceTempView("table1")
 
 #REPORTE 3------------------------------------------------------------------------------------
 df4 = spark.sql("SELECT Pais, ROUND(sum(`Ganancia Total`),3) as Ganancia FROM table1 "
-                "WHERE Region == 'Central America and the Caribbean' AND Departamento == 'Clothes'"
+                "(WHERE Country == 'Guatemala' OR Country == 'Costa Rica' OR Country == 'El Salvador' OR Country == 'Honduras' OR Country == 'Nicaragua' OR Country == 'Panama') AND Departamento == 'Clothes'"
           "Group By Pais")
 df4.show()
 
