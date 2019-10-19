@@ -45,3 +45,13 @@ df7.show()
 
 data = [go.Pie(labels=df7.toPandas()['Anio'],values=df7.toPandas()['Cantidad'])]
 plot(data, filename="/home/jovyan/work/graficas/Reporte6.html")
+
+#REPORTE 61-----------------------------------------------------------------------------------
+df8 = spark.sql("SELECT YEAR(TO_DATE(CAST(UNIX_TIMESTAMP(`Fecha Orden`, 'MM/dd/yyy') AS TIMESTAMP))) as Anio, COUNT(`Prioridad Orden`) as Cantidad  FROM table1 "
+                "WHERE `Prioridad Orden` == 'M'"
+                "Group By YEAR(TO_DATE(CAST(UNIX_TIMESTAMP(`Fecha Orden`, 'MM/dd/yyy') AS TIMESTAMP)))"
+                "Order By Cantidad DESC")
+df8.show()
+
+data1 = [go.Pie(labels=df8.toPandas()['Anio'],values=df8.toPandas()['Cantidad'])]
+plot(data1, filename="/home/jovyan/work/graficas/Reporte6.html")
