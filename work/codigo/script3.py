@@ -37,9 +37,9 @@ df.createOrReplaceTempView("table1")
 
 #REPORTE 3------------------------------------------------------------------------------------
 df4 = spark.sql("SELECT Pais, ROUND(sum(`Ganancia Total`),3) as Ganancia FROM table1 "
-                "WHERE (Pais == 'Guatemala' ) AND Departamento == 'Clothes'"
+                "WHERE (Pais == 'Guatemala' OR Pais == 'Costa Rica' OR Pais == 'El Salvador' OR Pais == 'Honduras' OR Pais == 'Nicaragua' OR Pais == 'Panama' ) AND Departamento == 'Clothes'"
           "Group By Pais")
 df4.show()
-#OR Country == 'Costa Rica' OR Country == 'El Salvador' OR Country == 'Honduras' OR Country == 'Nicaragua' OR Country == 'Panama'
+#
 data = [go.Pie(labels=df4.toPandas()['Pais'],values=df4.toPandas()['Ganancia'])]
 plot(data, filename="/home/jovyan/work/graficas/Reporte3.html")
