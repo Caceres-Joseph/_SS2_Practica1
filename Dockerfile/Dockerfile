@@ -8,3 +8,8 @@ RUN conda install --yes --file /tmp/requirements.txt && \
     fix-permissions /home/$NB_USER
 
 RUN pip install plotly==4.1.0
+
+USER root
+
+WORKDIR '/home/jovyan/work'
+RUN chmod 777 -R /home/jovyan/
