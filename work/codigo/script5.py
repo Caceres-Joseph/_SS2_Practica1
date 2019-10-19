@@ -45,3 +45,13 @@ df6.show()
 
 data = [go.Bar(x=df6.toPandas()['Anio'],y=df6.toPandas()['Unidades'])]
 plot(data, filename="/home/jovyan/work/graficas/Reporte5.html")
+
+
+df7 = spark.sql("SELECT YEAR(TO_DATE(CAST(UNIX_TIMESTAMP(`Fecha Orden`, 'MM/dd/yyy') AS TIMESTAMP))) as Anio, ROUND(sum(`Unidades Vendidas`),3) as Unidades  FROM table1 "
+                "WHERE Pais == 'Guatemala'"
+                "Group By YEAR(TO_DATE(CAST(UNIX_TIMESTAMP(`Fecha Orden`, 'MM/dd/yyy') AS TIMESTAMP)))"
+                "Order By Unidades DESC")
+df7.show()
+
+data2 = [go.Bar(x=df7.toPandas()['Anio'],y=df7.toPandas()['Unidades'])]
+plot(data2, filename="/home/jovyan/work/graficas/Reporte51.html")
