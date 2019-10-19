@@ -1,8 +1,8 @@
-version: '2'
+version: '3'
 services:
   pyspark_notebook:
-    image: jupyter/pyspark-notebook
-  #  command: start.sh jupyter lab --NotebookApp.token='pyspark'
+    build: Dockerfile
+    command: start.sh jupyter lab --NotebookApp.token='pyspark'
     volumes:
       - ./work:/home/jovyan/work
     ports:
